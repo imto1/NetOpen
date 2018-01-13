@@ -1,0 +1,234 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Net.NetworkInformation;  
+
+namespace netopen
+{
+    public partial class frmMain : Form
+    {
+
+        public frmMain()
+        {
+            InitializeComponent();
+        }
+
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void backslash_check()
+        {
+            try
+            {
+                if (txtAddress.Text.Substring(0, 1) != @"\")
+                {
+                    txtAddress.Text = @"\\" + txtAddress.Text;
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                }
+                else if (txtAddress.Text.Substring(1, 1) != @"\")
+                {
+                    txtAddress.Text = @"\" + txtAddress.Text;
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                //
+            }
+        }
+
+        private void format_spgc()
+        {
+            if (txtAddress.Text.Length == 1)
+                if (txtAddress.Text.Substring(0, 1).ToUpper() != "B")
+                {
+                    txtAddress.Text = "B" + txtAddress.Text;
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                }
+            if (txtAddress.Text.Length == 3){
+                {
+                    txtAddress.Text += "-SPGC";
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                }
+            }
+
+        }
+
+        private void format_assa()
+        {
+            if (txtAddress.Text.Length == 2)
+            {
+                txtAddress.Text += "P-ASSA";
+                txtAddress.SelectionStart = txtAddress.TextLength;
+                txtAddress.ScrollToCaret();
+            }
+        }
+
+        private void txtAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (format1.Checked)
+                format_spgc();
+            else if(format2.Checked)
+                format_assa();
+        }
+
+        private bool access_check(String path)
+        {
+            //get directory info
+            DirectoryInfo realpath = new DirectoryInfo(path);
+            try
+            {
+                //if GetDirectories works then is accessible
+                realpath.GetDirectories();
+                return true;
+            }
+            catch (Exception)
+            {
+                //if exception is not accesible
+                return false;
+            }
+        }
+
+        private bool pingHost(string nameOrAddress)
+        {
+            bool pingable = false;
+            Ping pinger = new Ping();
+            try
+            {
+                PingReply reply = pinger.Send(nameOrAddress);
+                pingable = reply.Status == IPStatus.Success;
+            }
+            catch (PingException)
+            {
+                // Discard PingExceptions and return false;
+            }
+            return pingable;
+        }
+
+        private String dash_check(String path){
+            String clearpath = path.Replace(@"\\", "");
+            String netpath = clearpath;
+            if (pingHost(netpath))
+                return path;
+            else
+            {
+                netpath = netpath.Replace("-", "_");
+                if (pingHost(netpath))
+                    return (@"\\" + netpath);
+            }
+            throw new PathTooLongException();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            backslash_check();
+            String path = txtAddress.Text;
+
+            try
+            {
+                path = dash_check(path);
+
+                if (openD.Checked)
+                    path += @"\D$\";
+                else if (openDCopy.Checked)
+                {
+                    path += @"\D$\Copy";
+                    if (!Directory.Exists(path))
+                            Directory.CreateDirectory(path);
+                }
+                else if (openDesktop.Checked)
+                {
+                    using (inputBox input = new inputBox())
+                    {
+                        DialogResult result = input.ShowDialog();
+                        if (result == DialogResult.OK)
+                        {
+                            string pid = input.inputValue;
+                            path += @"\C$\";
+                            if (Directory.Exists(path + @"Users"))
+                                path += @"Users\" + pid + @"\Desktop";
+                            else
+                                path += @"Documents and Settings\" + pid + @"\Desktop";
+                        }
+                        else
+                            throw new Exception("Operation cancelled by user.");
+                    }
+                }
+
+                if (access_check(path))
+                {
+                    txtAddress.Text = path;
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                    process.StartInfo.FileName = "explorer";
+                    process.StartInfo.Arguments = path;
+                    process.Start();
+                }
+                else
+                    MessageBox.Show("Something went wrong! NetOpen cannot find the spesified path.", "PATH ERROR",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (PathTooLongException)
+            {
+                MessageBox.Show("Pinging network address was failed! Recheck network address.", "PING ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void openDesktop_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtAddress.Text = "";
+            format1.Checked = true;
+            openDCopy.Checked = true;
+            lblStatus.Text = "";
+            txtAddress.Focus();
+        }
+
+        private void format1_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void format2_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void format3_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void openD_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+
+        private void openDCopy_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
+        }
+    }
+}
