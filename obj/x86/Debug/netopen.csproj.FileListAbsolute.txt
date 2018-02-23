@@ -18,3 +18,13 @@ E:\netopen\netopen\obj\x86\Debug\netopen.frmMain.resources
 E:\netopen\netopen\obj\x86\Debug\netopen.inputBox.resources
 E:\netopen\netopen\obj\x86\Debug\netopen.Properties.Resources.resources
 E:\netopen\netopen\obj\x86\Debug\netopen.csproj.GenerateResource.Cache
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\bin\Debug\netopen.exe.config
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.exe
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.pdb
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\bin\Debug\netopen.exe
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\bin\Debug\netopen.pdb
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.csprojResolveAssemblyReference.cache
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.frmMain.resources
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.inputBox.resources
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.Properties.Resources.resources
+D:\00-Vahid\Dropbox\workshop\netopen-c#-windows-app\netopen\obj\x86\Debug\netopen.csproj.GenerateResource.Cache

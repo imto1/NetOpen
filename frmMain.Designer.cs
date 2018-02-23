@@ -95,7 +95,7 @@
             this.lblTitle.AutoSize = true;
             this.lblTitle.BackColor = System.Drawing.Color.White;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(8, 9);
+            this.lblTitle.Location = new System.Drawing.Point(56, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(72, 20);
             this.lblTitle.TabIndex = 4;
@@ -105,10 +105,11 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.White;
-            this.lblStatus.Location = new System.Drawing.Point(12, 29);
+            this.lblStatus.Location = new System.Drawing.Point(56, 29);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.Size = new System.Drawing.Size(38, 13);
             this.lblStatus.TabIndex = 5;
+            this.lblStatus.Text = "Ready";
             // 
             // format1
             // 
@@ -239,7 +240,7 @@
             this.pbIcon.BackColor = System.Drawing.Color.White;
             this.pbIcon.BackgroundImage = global::netopen.Properties.Resources.if_network_transmit_118952;
             this.pbIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pbIcon.Location = new System.Drawing.Point(235, 0);
+            this.pbIcon.Location = new System.Drawing.Point(0, 0);
             this.pbIcon.Name = "pbIcon";
             this.pbIcon.Size = new System.Drawing.Size(50, 50);
             this.pbIcon.TabIndex = 14;

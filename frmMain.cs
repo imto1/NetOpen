@@ -133,62 +133,81 @@ namespace netopen
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            backslash_check();
-            String path = txtAddress.Text;
-
-            try
+            if (txtAddress.Text != null && txtAddress.Text != "")
             {
-                path = dash_check(path);
+                backslash_check();
+                String path = txtAddress.Text;
 
-                if (openD.Checked)
-                    path += @"\D$\";
-                else if (openDCopy.Checked)
+                try
                 {
-                    path += @"\D$\Copy";
-                    if (!Directory.Exists(path))
-                            Directory.CreateDirectory(path);
-                }
-                else if (openDesktop.Checked)
-                {
-                    using (inputBox input = new inputBox())
+                    path = dash_check(path);
+
+                    if (openD.Checked)
+                        path += @"\D$\";
+                    else if (openDCopy.Checked)
                     {
-                        DialogResult result = input.ShowDialog();
-                        if (result == DialogResult.OK)
+                        path += @"\D$\Copy";
+                        if (!Directory.Exists(path))
+                            Directory.CreateDirectory(path);
+                    }
+                    else if (openDesktop.Checked)
+                    {
+                        using (inputBox input = new inputBox())
                         {
-                            string pid = input.inputValue;
-                            path += @"\C$\";
-                            if (Directory.Exists(path + @"Users"))
-                                path += @"Users\" + pid + @"\Desktop";
+                            DialogResult result = input.ShowDialog();
+                            if (result == DialogResult.OK)
+                            {
+                                string pid = input.inputValue;
+                                path += @"\C$\";
+                                if (Directory.Exists(path + @"Users"))
+                                    path += @"Users\" + pid + @"\Desktop";
+                                else
+                                    path += @"Documents and Settings\" + pid + @"\Desktop";
+                            }
                             else
-                                path += @"Documents and Settings\" + pid + @"\Desktop";
+                                throw new Exception("Operation cancelled by user.");
                         }
-                        else
-                            throw new Exception("Operation cancelled by user.");
+                    }
+
+                    if (access_check(path))
+                    {
+                        lblStatus.Text = path;
+                        lblStatus.ForeColor = Color.Green;
+                        txtAddress.Text = "";
+                        txtAddress.Focus();
+                        process.StartInfo.FileName = "explorer";
+                        process.StartInfo.Arguments = path;
+                        process.Start();
+                    }
+                    else
+                    {
+                        lblStatus.Text = "Path not found!";
+                        lblStatus.ForeColor = Color.Red;
                     }
                 }
-
-                if (access_check(path))
+                catch (PathTooLongException)
                 {
-                    txtAddress.Text = path;
-                    txtAddress.SelectionStart = txtAddress.TextLength;
-                    txtAddress.ScrollToCaret();
-                    process.StartInfo.FileName = "explorer";
-                    process.StartInfo.Arguments = path;
-                    process.Start();
+                    lblStatus.Text = "Unreacable!";
+                    lblStatus.ForeColor = Color.Red;
                 }
-                else
-                    MessageBox.Show("Something went wrong! NetOpen cannot find the spesified path.", "PATH ERROR",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception ex)
+                {
+                    lblStatus.Text = ex.Message;
+                    lblStatus.ForeColor = Color.Red;
+                }
             }
-            catch (PathTooLongException)
+            else if (lblStatus.Text != null && lblStatus.Text != "" && access_check(lblStatus.Text))
             {
-                MessageBox.Show("Pinging network address was failed! Recheck network address.", "PING ERROR",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                String path = lblStatus.Text;
+                txtAddress.Focus();
+                process.StartInfo.FileName = "explorer";
+                process.StartInfo.Arguments = path;
+                process.Start();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "ERROR",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblStatus.Text = "Empty address!";
+                lblStatus.ForeColor = Color.Red;
             }
         }
 
@@ -202,7 +221,8 @@ namespace netopen
             txtAddress.Text = "";
             format1.Checked = true;
             openDCopy.Checked = true;
-            lblStatus.Text = "";
+            lblStatus.Text = "Ready";
+            lblStatus.ForeColor = Color.Black;
             txtAddress.Focus();
         }
 
