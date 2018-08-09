@@ -47,6 +47,7 @@
             this.process = new System.Diagnostics.Process();
             this.btnReset = new System.Windows.Forms.Button();
             this.pbIcon = new System.Windows.Forms.PictureBox();
+            this.lblDeveloper = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpBar)).BeginInit();
             this.gbPath.SuspendLayout();
@@ -151,7 +152,7 @@
             this.gbPath.Controls.Add(this.openDesktop);
             this.gbPath.Controls.Add(this.openDCopy);
             this.gbPath.Controls.Add(this.openD);
-            this.gbPath.Location = new System.Drawing.Point(144, 124);
+            this.gbPath.Location = new System.Drawing.Point(144, 112);
             this.gbPath.Name = "gbPath";
             this.gbPath.Size = new System.Drawing.Size(128, 95);
             this.gbPath.TabIndex = 12;
@@ -198,7 +199,7 @@
             this.gbAF.Controls.Add(this.format1);
             this.gbAF.Controls.Add(this.format2);
             this.gbAF.Controls.Add(this.format3);
-            this.gbAF.Location = new System.Drawing.Point(12, 124);
+            this.gbAF.Location = new System.Drawing.Point(12, 112);
             this.gbAF.Name = "gbAF";
             this.gbAF.Size = new System.Drawing.Size(126, 95);
             this.gbAF.TabIndex = 11;
@@ -246,6 +247,16 @@
             this.pbIcon.TabIndex = 14;
             this.pbIcon.TabStop = false;
             // 
+            // lblDeveloper
+            // 
+            this.lblDeveloper.AutoSize = true;
+            this.lblDeveloper.Location = new System.Drawing.Point(21, 210);
+            this.lblDeveloper.Name = "lblDeveloper";
+            this.lblDeveloper.Size = new System.Drawing.Size(240, 13);
+            this.lblDeveloper.TabIndex = 15;
+            this.lblDeveloper.Text = "Coded S.Vahid Hosseini (ImTO1) - @s_vahid_h";
+            this.lblDeveloper.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnOpen;
@@ -253,6 +264,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
+            this.Controls.Add(this.lblDeveloper);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblAddress);
@@ -271,7 +283,7 @@
             this.MinimumSize = new System.Drawing.Size(280, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NetOpen by S.Vahid Hosseini";
+            this.Text = "NetOpen - ImTO1";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
@@ -306,6 +318,7 @@
         private System.Diagnostics.Process process;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pbIcon;
+        private System.Windows.Forms.Label lblDeveloper;
     }
 }
 
