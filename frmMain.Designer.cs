@@ -271,7 +271,7 @@
             this.MinimumSize = new System.Drawing.Size(280, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NetOpen";
+            this.Text = "NetOpen by S.Vahid Hosseini";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();

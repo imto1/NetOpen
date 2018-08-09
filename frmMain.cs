@@ -122,9 +122,15 @@ namespace netopen
             String netpath = clearpath;
             if (pingHost(netpath))
                 return path;
-            else
+            else if(netpath.Contains("-"))
             {
                 netpath = netpath.Replace("-", "_");
+                if (pingHost(netpath))
+                    return (@"\\" + netpath);
+            }
+            else
+            {
+                netpath = netpath.Replace("_", "-");
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
             }
