@@ -250,11 +250,11 @@
             // lblDeveloper
             // 
             this.lblDeveloper.AutoSize = true;
-            this.lblDeveloper.Location = new System.Drawing.Point(21, 210);
+            this.lblDeveloper.Location = new System.Drawing.Point(59, 210);
             this.lblDeveloper.Name = "lblDeveloper";
-            this.lblDeveloper.Size = new System.Drawing.Size(240, 13);
+            this.lblDeveloper.Size = new System.Drawing.Size(165, 13);
             this.lblDeveloper.TabIndex = 15;
-            this.lblDeveloper.Text = "Coded S.Vahid Hosseini (ImTO1) - @s_vahid_h";
+            this.lblDeveloper.Text = "Coded by ImTO1 -- @s_vahid_h";
             this.lblDeveloper.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmMain
@@ -283,7 +283,7 @@
             this.MinimumSize = new System.Drawing.Size(280, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NetOpen - ImTO1";
+            this.Text = "NetOpen";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
