@@ -251,5 +251,16 @@ namespace netopen
         {
             txtAddress.Focus();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            lblTitle.Text += " v" + Application.ProductVersion.ToString();
+        }
+
+        private void llblProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            process.StartInfo = new System.Diagnostics.ProcessStartInfo("https://www.instagram.com/s_vahid_h/");
+            process.Start();
+        }
     }
 }

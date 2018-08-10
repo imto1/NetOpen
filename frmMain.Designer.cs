@@ -47,7 +47,7 @@
             this.process = new System.Diagnostics.Process();
             this.btnReset = new System.Windows.Forms.Button();
             this.pbIcon = new System.Windows.Forms.PictureBox();
-            this.lblDeveloper = new System.Windows.Forms.Label();
+            this.llblProfile = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpBar)).BeginInit();
             this.gbPath.SuspendLayout();
@@ -247,15 +247,18 @@
             this.pbIcon.TabIndex = 14;
             this.pbIcon.TabStop = false;
             // 
-            // lblDeveloper
+            // llblProfile
             // 
-            this.lblDeveloper.AutoSize = true;
-            this.lblDeveloper.Location = new System.Drawing.Point(59, 210);
-            this.lblDeveloper.Name = "lblDeveloper";
-            this.lblDeveloper.Size = new System.Drawing.Size(165, 13);
-            this.lblDeveloper.TabIndex = 15;
-            this.lblDeveloper.Text = "Coded by ImTO1 -- @s_vahid_h";
-            this.lblDeveloper.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.llblProfile.AutoSize = true;
+            this.llblProfile.LinkArea = new System.Windows.Forms.LinkArea(18, 10);
+            this.llblProfile.Location = new System.Drawing.Point(60, 210);
+            this.llblProfile.Name = "llblProfile";
+            this.llblProfile.Size = new System.Drawing.Size(162, 20);
+            this.llblProfile.TabIndex = 16;
+            this.llblProfile.TabStop = true;
+            this.llblProfile.Text = "Coded by ImTO1 -- @s_vahid_h";
+            this.llblProfile.UseCompatibleTextRendering = true;
+            this.llblProfile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblProfile_LinkClicked);
             // 
             // frmMain
             // 
@@ -264,7 +267,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
-            this.Controls.Add(this.lblDeveloper);
+            this.Controls.Add(this.llblProfile);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblAddress);
@@ -283,8 +286,9 @@
             this.MinimumSize = new System.Drawing.Size(280, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NetOpen";
+            this.Text = "BEHMERD NetOpen";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpBar)).EndInit();
@@ -318,7 +322,7 @@
         private System.Diagnostics.Process process;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pbIcon;
-        private System.Windows.Forms.Label lblDeveloper;
+        private System.Windows.Forms.LinkLabel llblProfile;
     }
 }
 
