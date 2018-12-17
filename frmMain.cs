@@ -195,12 +195,12 @@ namespace netopen
                         path = path.Replace("D","E");
                         if (access_check(path))
                         {
-                            openPath(path, Color.Olive, "Can't fing D: drive! Openning E: instead!");
+                            openPath(path, Color.Olive, "Can't find D: drive! Openning E: instead!");
                         }
                         else
                         {
                             lblStatus.Text = "Path not found!";
-                            lblMessage.Text = "Check the address!";
+                            lblMessage.Text = "Check the network address!";
                             lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                         }
                     }
@@ -221,12 +221,12 @@ namespace netopen
                         {
                             if (access_check(path))
                             {
-                                openPath(path, Color.Olive, "Can't fing D: drive! Openning E: instead!");
+                                openPath(path, Color.Olive, "Can't find D: drive! Openning E: instead!");
                             }
                             else
                             {
                                 lblStatus.Text = "Path not found!";
-                                lblMessage.Text = "Check the address!";
+                                lblMessage.Text = "Check the network address!";
                                 lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                             }
                         }
@@ -234,14 +234,14 @@ namespace netopen
                     else
                     {
                         lblStatus.Text = "Path not found!";
-                        lblMessage.Text = "Check the address!";
+                        lblMessage.Text = "Check the network address!";
                         lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                     }
                 }
                 catch (PathTooLongException)
                 {
                     lblStatus.Text = "Unreacable!";
-                    lblMessage.Text = "Remote computer is out of reach!";
+                    lblMessage.Text = "Pinging network address failed!";
                     lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                 }
                 catch (Exception ex)
@@ -261,7 +261,7 @@ namespace netopen
             else
             {
                 lblStatus.Text = "Empty address!";
-                lblMessage.Text = "Insert remote computer's address!";
+                lblMessage.Text = "Insert the network address!";
                 lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
             }
         }
