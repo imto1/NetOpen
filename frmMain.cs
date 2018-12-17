@@ -132,6 +132,26 @@ namespace netopen
             throw new PathTooLongException();
         }
 
+        private void openPath(string path, Color color, string message)
+        {
+            try
+            {
+                lblStatus.Text = path;
+                lblMessage.ForeColor = lblStatus.ForeColor = color;
+                lblMessage.Text = message;
+                txtAddress.Text = "";
+                txtAddress.Focus();
+                process.StartInfo.FileName = "explorer";
+                process.StartInfo.Arguments = path;
+                process.Start();
+            }
+            catch (Exception e)
+            {
+                lblMessage.Text = e.Message;
+                lblMessage.ForeColor = Color.Red;
+            }
+        }
+
         private void btnOpen_Click(object sender, EventArgs e)
         {
             if (txtAddress.Text != null && txtAddress.Text != "")
@@ -146,11 +166,7 @@ namespace netopen
                     if (openD.Checked)
                         path += @"\D$\";
                     else if (openDCopy.Checked)
-                    {
                         path += @"\D$\Copy";
-                        if (!Directory.Exists(path))
-                            Directory.CreateDirectory(path);
-                    }
                     else if (openDesktop.Checked)
                     {
                         using (inputBox input = new inputBox())
@@ -172,34 +188,47 @@ namespace netopen
 
                     if (access_check(path))
                     {
-                        lblStatus.Text = path;
-                        lblMessage.ForeColor = lblStatus.ForeColor = Color.Green;
-                        lblMessage.Text = "Successful!";
-                        txtAddress.Text = "";
-                        txtAddress.Focus();
-                        process.StartInfo.FileName = "explorer";
-                        process.StartInfo.Arguments = path;
-                        process.Start();
+                        openPath(path, Color.Green, "Successful!");
                     }
-                    else if(openD.Checked || openDCopy.Checked)
+                    else if(openD.Checked)
                     {
                         path = path.Replace("D","E");
                         if (access_check(path))
                         {
-                            lblStatus.Text = path;
-                            lblMessage.ForeColor = lblStatus.ForeColor = Color.Olive;
-                            lblMessage.Text = "D: not found! Used E: instead!";
-                            txtAddress.Text = "";
-                            txtAddress.Focus();
-                            process.StartInfo.FileName = "explorer";
-                            process.StartInfo.Arguments = path;
-                            process.Start();
+                            openPath(path, Color.Olive, "Can't fing D: drive! Openning E: instead!");
                         }
                         else
                         {
                             lblStatus.Text = "Path not found!";
                             lblMessage.Text = "Check the address!";
                             lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
+                        }
+                    }
+                    else if(openDCopy.Checked)
+                    {
+                        try
+                        {
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                        }
+                        catch
+                        {
+                            path = path.Replace("D", "E");
+                            if (!Directory.Exists(path))
+                                Directory.CreateDirectory(path);
+                        }
+                        finally
+                        {
+                            if (access_check(path))
+                            {
+                                openPath(path, Color.Olive, "Can't fing D: drive! Openning E: instead!");
+                            }
+                            else
+                            {
+                                lblStatus.Text = "Path not found!";
+                                lblMessage.Text = "Check the address!";
+                                lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
+                            }
                         }
                     }
                     else
@@ -212,7 +241,7 @@ namespace netopen
                 catch (PathTooLongException)
                 {
                     lblStatus.Text = "Unreacable!";
-                    lblMessage.Text = "Remote system is out of reach!";
+                    lblMessage.Text = "Remote computer is out of reach!";
                     lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                 }
                 catch (Exception ex)
@@ -232,7 +261,7 @@ namespace netopen
             else
             {
                 lblStatus.Text = "Empty address!";
-                lblMessage.Text = "Insert remote system's address!";
+                lblMessage.Text = "Insert remote computer's address!";
                 lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
             }
         }
