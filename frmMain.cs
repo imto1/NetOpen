@@ -173,28 +173,52 @@ namespace netopen
                     if (access_check(path))
                     {
                         lblStatus.Text = path;
-                        lblStatus.ForeColor = Color.Green;
+                        lblMessage.ForeColor = lblStatus.ForeColor = Color.Green;
+                        lblMessage.Text = "Successful!";
                         txtAddress.Text = "";
                         txtAddress.Focus();
                         process.StartInfo.FileName = "explorer";
                         process.StartInfo.Arguments = path;
                         process.Start();
                     }
+                    else if(openD.Checked || openDCopy.Checked)
+                    {
+                        path = path.Replace("D","E");
+                        if (access_check(path))
+                        {
+                            lblStatus.Text = path;
+                            lblMessage.ForeColor = lblStatus.ForeColor = Color.Olive;
+                            lblMessage.Text = "D: not found! Used E: instead!";
+                            txtAddress.Text = "";
+                            txtAddress.Focus();
+                            process.StartInfo.FileName = "explorer";
+                            process.StartInfo.Arguments = path;
+                            process.Start();
+                        }
+                        else
+                        {
+                            lblStatus.Text = "Path not found!";
+                            lblMessage.Text = "Check the address!";
+                            lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
+                        }
+                    }
                     else
                     {
                         lblStatus.Text = "Path not found!";
-                        lblStatus.ForeColor = Color.Red;
+                        lblMessage.Text = "Check the address!";
+                        lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                     }
                 }
                 catch (PathTooLongException)
                 {
                     lblStatus.Text = "Unreacable!";
-                    lblStatus.ForeColor = Color.Red;
+                    lblMessage.Text = "Remote system is out of reach!";
+                    lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                 }
                 catch (Exception ex)
                 {
-                    lblStatus.Text = ex.Message;
-                    lblStatus.ForeColor = Color.Red;
+                    lblMessage.Text = ex.Message;
+                    lblMessage.ForeColor = Color.Red;
                 }
             }
             else if (lblStatus.Text != null && lblStatus.Text != "" && access_check(lblStatus.Text))
@@ -208,7 +232,8 @@ namespace netopen
             else
             {
                 lblStatus.Text = "Empty address!";
-                lblStatus.ForeColor = Color.Red;
+                lblMessage.Text = "Insert remote system's address!";
+                lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
             }
         }
 
@@ -223,7 +248,8 @@ namespace netopen
             format1.Checked = true;
             openDCopy.Checked = true;
             lblStatus.Text = "Ready";
-            lblStatus.ForeColor = Color.Black;
+            lblMessage.Text = "";
+            lblMessage.ForeColor = lblStatus.ForeColor = Color.Black;
             txtAddress.Focus();
         }
 
@@ -254,7 +280,8 @@ namespace netopen
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            lblTitle.Text += " v" + Application.ProductVersion.ToString();
+            string[] version = Application.ProductVersion.ToString().Split('.');
+            lblTitle.Text += " v" + version[0] + "." + version[1];
         }
 
         private void llblProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

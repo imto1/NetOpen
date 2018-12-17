@@ -48,6 +48,7 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.pbIcon = new System.Windows.Forms.PictureBox();
             this.llblProfile = new System.Windows.Forms.LinkLabel();
+            this.lblMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bpBar)).BeginInit();
             this.gbPath.SuspendLayout();
@@ -85,9 +86,9 @@
             // 
             this.btnOpen.Location = new System.Drawing.Point(222, 57);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(50, 23);
+            this.btnOpen.Size = new System.Drawing.Size(23, 23);
             this.btnOpen.TabIndex = 9;
-            this.btnOpen.Text = "&Open";
+            this.btnOpen.Text = "√";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -141,9 +142,9 @@
             this.format3.AutoSize = true;
             this.format3.Location = new System.Drawing.Point(6, 67);
             this.format3.Name = "format3";
-            this.format3.Size = new System.Drawing.Size(111, 17);
+            this.format3.Size = new System.Drawing.Size(97, 17);
             this.format3.TabIndex = 5;
-            this.format3.Text = "&Irregular formats";
+            this.format3.Text = "&Other formats";
             this.format3.UseVisualStyleBackColor = true;
             this.format3.CheckedChanged += new System.EventHandler(this.format3_CheckedChanged);
             // 
@@ -228,11 +229,11 @@
             // btnReset
             // 
             this.btnReset.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnReset.Location = new System.Drawing.Point(222, 83);
+            this.btnReset.Location = new System.Drawing.Point(251, 57);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(50, 23);
+            this.btnReset.Size = new System.Drawing.Size(23, 23);
             this.btnReset.TabIndex = 10;
-            this.btnReset.Text = "&Reset";
+            this.btnReset.Text = "←";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -260,6 +261,15 @@
             this.llblProfile.UseCompatibleTextRendering = true;
             this.llblProfile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblProfile_LinkClicked);
             // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.lblMessage.Location = new System.Drawing.Point(12, 88);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(0, 13);
+            this.lblMessage.TabIndex = 17;
+            // 
             // frmMain
             // 
             this.AcceptButton = this.btnOpen;
@@ -267,6 +277,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.llblProfile);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.btnReset);
@@ -323,6 +334,7 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pbIcon;
         private System.Windows.Forms.LinkLabel llblProfile;
+        private System.Windows.Forms.Label lblMessage;
     }
 }
 
