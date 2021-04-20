@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using System.Net.NetworkInformation;  
+using System.Net.NetworkInformation;
 
 namespace netopen
 {
@@ -42,6 +42,17 @@ namespace netopen
             }
         }
 
+        private void format_hq()
+        {
+            if (txtAddress.Text.Length == 1)
+                if (txtAddress.Text.Substring(0, 1).ToUpper() != "H")
+                {
+                    txtAddress.Text = "HQ-5WST-" + txtAddress.Text;
+                    txtAddress.SelectionStart = txtAddress.TextLength;
+                    txtAddress.ScrollToCaret();
+                }
+        }
+
         private void format_spgc()
         {
             if (txtAddress.Text.Length == 1)
@@ -51,14 +62,12 @@ namespace netopen
                     txtAddress.SelectionStart = txtAddress.TextLength;
                     txtAddress.ScrollToCaret();
                 }
-            if (txtAddress.Text.Length == 3){
-                {
-                    txtAddress.Text += "-SPGC";
-                    txtAddress.SelectionStart = txtAddress.TextLength;
-                    txtAddress.ScrollToCaret();
-                }
+            if (txtAddress.Text.Length == 3)
+            {
+                txtAddress.Text += "-SPGC";
+                txtAddress.SelectionStart = txtAddress.TextLength;
+                txtAddress.ScrollToCaret();
             }
-
         }
 
         private void format_assa()
@@ -73,9 +82,11 @@ namespace netopen
 
         private void txtAddress_TextChanged(object sender, EventArgs e)
         {
-            if (format1.Checked)
+            if (format0.Checked)
+                format_hq();
+            else if (format1.Checked)
                 format_spgc();
-            else if(format2.Checked)
+            else if (format2.Checked)
                 format_assa();
         }
 
@@ -112,12 +123,13 @@ namespace netopen
             return pingable;
         }
 
-        private String dash_check(String path){
+        private String dash_check(String path)
+        {
             String clearpath = path.Replace(@"\\", "");
             String netpath = clearpath;
             if (pingHost(netpath))
                 return path;
-            else if(netpath.Contains("-"))
+            else if (netpath.Contains("-"))
             {
                 netpath = netpath.Replace("-", "_");
                 if (pingHost(netpath))
@@ -190,9 +202,9 @@ namespace netopen
                     {
                         openPath(path, Color.Green, "Successful!");
                     }
-                    else if(openD.Checked)
+                    else if (openD.Checked)
                     {
-                        path = path.Replace("D","E");
+                        path = path.Replace("D", "E");
                         if (access_check(path))
                         {
                             openPath(path, Color.Olive, "Can't find D: drive! Openning E: instead!");
@@ -204,7 +216,7 @@ namespace netopen
                             lblMessage.ForeColor = lblStatus.ForeColor = Color.Red;
                         }
                     }
-                    else if(openDCopy.Checked)
+                    else if (openDCopy.Checked)
                     {
                         try
                         {
@@ -313,10 +325,14 @@ namespace netopen
             lblTitle.Text += " v" + version[0] + "." + version[1];
         }
 
-        private void llblProfile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void PbIcon_Click(object sender, EventArgs e)
         {
-            process.StartInfo = new System.Diagnostics.ProcessStartInfo("https://www.instagram.com/s_vahid_h/");
-            process.Start();
+            MessageBox.Show("Author: S. Vahid Hosseini. s.vahid.h@pm.me", "About", MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
+
+        private void Format0_CheckedChanged(object sender, EventArgs e)
+        {
+            txtAddress.Focus();
         }
     }
 }

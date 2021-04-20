@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.pbHeader = new System.Windows.Forms.PictureBox();
-            this.bpBar = new System.Windows.Forms.PictureBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -46,33 +44,17 @@
             this.lblAddress = new System.Windows.Forms.Label();
             this.process = new System.Diagnostics.Process();
             this.btnReset = new System.Windows.Forms.Button();
-            this.pbIcon = new System.Windows.Forms.PictureBox();
-            this.llblProfile = new System.Windows.Forms.LinkLabel();
             this.lblMessage = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bpBar)).BeginInit();
+            this.pbIcon = new System.Windows.Forms.PictureBox();
+            this.bpBar = new System.Windows.Forms.PictureBox();
+            this.pbHeader = new System.Windows.Forms.PictureBox();
+            this.format0 = new System.Windows.Forms.RadioButton();
             this.gbPath.SuspendLayout();
             this.gbAF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bpBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbHeader
-            // 
-            this.pbHeader.BackColor = System.Drawing.Color.White;
-            this.pbHeader.Location = new System.Drawing.Point(0, 0);
-            this.pbHeader.Name = "pbHeader";
-            this.pbHeader.Size = new System.Drawing.Size(300, 50);
-            this.pbHeader.TabIndex = 0;
-            this.pbHeader.TabStop = false;
-            // 
-            // bpBar
-            // 
-            this.bpBar.BackColor = System.Drawing.Color.Black;
-            this.bpBar.Location = new System.Drawing.Point(0, 50);
-            this.bpBar.Name = "bpBar";
-            this.bpBar.Size = new System.Drawing.Size(300, 1);
-            this.bpBar.TabIndex = 1;
-            this.bpBar.TabStop = false;
             // 
             // txtAddress
             // 
@@ -117,9 +99,9 @@
             // 
             this.format1.AutoSize = true;
             this.format1.Checked = true;
-            this.format1.Location = new System.Drawing.Point(6, 21);
+            this.format1.Location = new System.Drawing.Point(6, 44);
             this.format1.Name = "format1";
-            this.format1.Size = new System.Drawing.Size(93, 17);
+            this.format1.Size = new System.Drawing.Size(92, 17);
             this.format1.TabIndex = 3;
             this.format1.TabStop = true;
             this.format1.Text = "&B??-SPGC????";
@@ -129,7 +111,7 @@
             // format2
             // 
             this.format2.AutoSize = true;
-            this.format2.Location = new System.Drawing.Point(6, 44);
+            this.format2.Location = new System.Drawing.Point(6, 67);
             this.format2.Name = "format2";
             this.format2.Size = new System.Drawing.Size(87, 17);
             this.format2.TabIndex = 4;
@@ -140,7 +122,7 @@
             // format3
             // 
             this.format3.AutoSize = true;
-            this.format3.Location = new System.Drawing.Point(6, 67);
+            this.format3.Location = new System.Drawing.Point(6, 90);
             this.format3.Name = "format3";
             this.format3.Size = new System.Drawing.Size(97, 17);
             this.format3.TabIndex = 5;
@@ -153,9 +135,9 @@
             this.gbPath.Controls.Add(this.openDesktop);
             this.gbPath.Controls.Add(this.openDCopy);
             this.gbPath.Controls.Add(this.openD);
-            this.gbPath.Location = new System.Drawing.Point(144, 112);
+            this.gbPath.Location = new System.Drawing.Point(144, 104);
             this.gbPath.Name = "gbPath";
-            this.gbPath.Size = new System.Drawing.Size(128, 95);
+            this.gbPath.Size = new System.Drawing.Size(128, 115);
             this.gbPath.TabIndex = 12;
             this.gbPath.TabStop = false;
             this.gbPath.Text = "Open at";
@@ -197,12 +179,13 @@
             // 
             // gbAF
             // 
+            this.gbAF.Controls.Add(this.format0);
             this.gbAF.Controls.Add(this.format1);
             this.gbAF.Controls.Add(this.format2);
             this.gbAF.Controls.Add(this.format3);
-            this.gbAF.Location = new System.Drawing.Point(12, 112);
+            this.gbAF.Location = new System.Drawing.Point(12, 104);
             this.gbAF.Name = "gbAF";
-            this.gbAF.Size = new System.Drawing.Size(126, 95);
+            this.gbAF.Size = new System.Drawing.Size(126, 115);
             this.gbAF.TabIndex = 11;
             this.gbAF.TabStop = false;
             this.gbAF.Text = "Address format";
@@ -237,6 +220,15 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.lblMessage.Location = new System.Drawing.Point(12, 88);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(0, 13);
+            this.lblMessage.TabIndex = 17;
+            // 
             // pbIcon
             // 
             this.pbIcon.BackColor = System.Drawing.Color.White;
@@ -247,28 +239,36 @@
             this.pbIcon.Size = new System.Drawing.Size(50, 50);
             this.pbIcon.TabIndex = 14;
             this.pbIcon.TabStop = false;
+            this.pbIcon.Click += new System.EventHandler(this.PbIcon_Click);
             // 
-            // llblProfile
+            // bpBar
             // 
-            this.llblProfile.AutoSize = true;
-            this.llblProfile.LinkArea = new System.Windows.Forms.LinkArea(18, 10);
-            this.llblProfile.Location = new System.Drawing.Point(60, 210);
-            this.llblProfile.Name = "llblProfile";
-            this.llblProfile.Size = new System.Drawing.Size(162, 20);
-            this.llblProfile.TabIndex = 16;
-            this.llblProfile.TabStop = true;
-            this.llblProfile.Text = "Coded by ImTO1 -- @s_vahid_h";
-            this.llblProfile.UseCompatibleTextRendering = true;
-            this.llblProfile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblProfile_LinkClicked);
+            this.bpBar.BackColor = System.Drawing.Color.Black;
+            this.bpBar.Location = new System.Drawing.Point(0, 50);
+            this.bpBar.Name = "bpBar";
+            this.bpBar.Size = new System.Drawing.Size(300, 1);
+            this.bpBar.TabIndex = 1;
+            this.bpBar.TabStop = false;
             // 
-            // lblMessage
+            // pbHeader
             // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.BackColor = System.Drawing.SystemColors.Control;
-            this.lblMessage.Location = new System.Drawing.Point(12, 88);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(0, 13);
-            this.lblMessage.TabIndex = 17;
+            this.pbHeader.BackColor = System.Drawing.Color.White;
+            this.pbHeader.Location = new System.Drawing.Point(0, 0);
+            this.pbHeader.Name = "pbHeader";
+            this.pbHeader.Size = new System.Drawing.Size(300, 50);
+            this.pbHeader.TabIndex = 0;
+            this.pbHeader.TabStop = false;
+            // 
+            // format0
+            // 
+            this.format0.AutoSize = true;
+            this.format0.Location = new System.Drawing.Point(6, 21);
+            this.format0.Name = "format0";
+            this.format0.Size = new System.Drawing.Size(98, 17);
+            this.format0.TabIndex = 6;
+            this.format0.Text = "&HQ-5WST-????";
+            this.format0.UseVisualStyleBackColor = true;
+            this.format0.CheckedChanged += new System.EventHandler(this.Format0_CheckedChanged);
             // 
             // frmMain
             // 
@@ -278,7 +278,6 @@
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
             this.Controls.Add(this.lblMessage);
-            this.Controls.Add(this.llblProfile);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.lblAddress);
@@ -301,13 +300,13 @@
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bpBar)).EndInit();
             this.gbPath.ResumeLayout(false);
             this.gbPath.PerformLayout();
             this.gbAF.ResumeLayout(false);
             this.gbAF.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bpBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,8 +332,8 @@
         private System.Diagnostics.Process process;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.PictureBox pbIcon;
-        private System.Windows.Forms.LinkLabel llblProfile;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.RadioButton format0;
     }
 }
 

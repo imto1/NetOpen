@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netopen", "netopen.csproj", "{94DFF799-23E8-425A-83E0-C3B0796F005E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94DFF799-23E8-425A-83E0-C3B0796F005E}.Debug|x86.ActiveCfg = Debug|x86
+		{94DFF799-23E8-425A-83E0-C3B0796F005E}.Debug|x86.Build.0 = Debug|x86
+		{94DFF799-23E8-425A-83E0-C3B0796F005E}.Release|x86.ActiveCfg = Release|x86
+		{94DFF799-23E8-425A-83E0-C3B0796F005E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93B9D3E8-2BD5-433E-B692-1D8EB0D88928}
+	EndGlobalSection
+EndGlobal
