@@ -41,6 +41,7 @@
             this.openDCopy = new System.Windows.Forms.RadioButton();
             this.openD = new System.Windows.Forms.RadioButton();
             this.gbAF = new System.Windows.Forms.GroupBox();
+            this.format0 = new System.Windows.Forms.RadioButton();
             this.lblAddress = new System.Windows.Forms.Label();
             this.process = new System.Diagnostics.Process();
             this.btnReset = new System.Windows.Forms.Button();
@@ -48,7 +49,7 @@
             this.pbIcon = new System.Windows.Forms.PictureBox();
             this.bpBar = new System.Windows.Forms.PictureBox();
             this.pbHeader = new System.Windows.Forms.PictureBox();
-            this.format0 = new System.Windows.Forms.RadioButton();
+            this.lblCount = new System.Windows.Forms.Label();
             this.gbPath.SuspendLayout();
             this.gbAF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
@@ -137,7 +138,7 @@
             this.gbPath.Controls.Add(this.openD);
             this.gbPath.Location = new System.Drawing.Point(144, 104);
             this.gbPath.Name = "gbPath";
-            this.gbPath.Size = new System.Drawing.Size(128, 115);
+            this.gbPath.Size = new System.Drawing.Size(128, 92);
             this.gbPath.TabIndex = 12;
             this.gbPath.TabStop = false;
             this.gbPath.Text = "Open at";
@@ -189,6 +190,17 @@
             this.gbAF.TabIndex = 11;
             this.gbAF.TabStop = false;
             this.gbAF.Text = "Address format";
+            // 
+            // format0
+            // 
+            this.format0.AutoSize = true;
+            this.format0.Location = new System.Drawing.Point(6, 21);
+            this.format0.Name = "format0";
+            this.format0.Size = new System.Drawing.Size(98, 17);
+            this.format0.TabIndex = 6;
+            this.format0.Text = "&HQ-5WST-????";
+            this.format0.UseVisualStyleBackColor = true;
+            this.format0.CheckedChanged += new System.EventHandler(this.Format0_CheckedChanged);
             // 
             // lblAddress
             // 
@@ -259,16 +271,15 @@
             this.pbHeader.TabIndex = 0;
             this.pbHeader.TabStop = false;
             // 
-            // format0
+            // lblCount
             // 
-            this.format0.AutoSize = true;
-            this.format0.Location = new System.Drawing.Point(6, 21);
-            this.format0.Name = "format0";
-            this.format0.Size = new System.Drawing.Size(98, 17);
-            this.format0.TabIndex = 6;
-            this.format0.Text = "&HQ-5WST-????";
-            this.format0.UseVisualStyleBackColor = true;
-            this.format0.CheckedChanged += new System.EventHandler(this.Format0_CheckedChanged);
+            this.lblCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.Location = new System.Drawing.Point(144, 199);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(130, 23);
+            this.lblCount.TabIndex = 18;
+            this.lblCount.Text = "0";
+            this.lblCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // frmMain
             // 
@@ -277,6 +288,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
+            this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.btnReset);
@@ -296,8 +308,9 @@
             this.MinimumSize = new System.Drawing.Size(280, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BEHMERD NetOpen";
+            this.Text = "NetOpen";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.gbPath.ResumeLayout(false);
@@ -334,6 +347,7 @@
         private System.Windows.Forms.PictureBox pbIcon;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.RadioButton format0;
+        private System.Windows.Forms.Label lblCount;
     }
 }
 
