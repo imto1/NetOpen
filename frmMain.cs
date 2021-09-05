@@ -9,30 +9,48 @@ namespace netopen
     public partial class frmMain : Form
     {
         int openCount = 0;
-        String worktime = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
+        String workTime = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
                 DateTime.Now.Day.ToString();
+        String userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+        String userHome = "";
+        String countFile = "";
+        String logFile = "";
         public frmMain()
         {
             InitializeComponent();
         }
 
-        private void frmMain_Shown(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void frmMain_Shown(object sender, EventArgs e) => txtAddress.Focus();
 
-       private void log(String text)
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            string[] version = Application.ProductVersion.ToString().Split('.');
+            lblTitle.Text += " v" + version[0] + "." + version[1] + "." + version[2];
+            int index = userName.LastIndexOf('\\') + 1;
+            userName = userName.Substring(index, userName.Length - (index));
+            userHome = @"c:\users\" + userName + @"\desktop\";
+            countFile = userHome + workTime + "-count.log";
+            if (File.Exists(countFile))
+                openCount = Convert.ToInt32(File.ReadAllText(countFile));
+            lblCount.Text = Convert.ToString(openCount);
+            logFile = userHome + workTime + ".log";
+        }
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) => 
+            File.WriteAllText(countFile, Convert.ToString(openCount));
+
+        private void log(String text)
         {
             String now = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
                 DateTime.Now.Day.ToString();
-            if (worktime != now)
+            if (workTime != now)
             {
-                worktime = now;
+                workTime = now;
                 openCount = 0;
+                logFile = userHome + workTime + ".log";
             }
-            String filename = Directory.GetCurrentDirectory() + "\\" + worktime + ".log";
-            File.AppendAllText(filename, text + "\n");
+            File.AppendAllText(logFile, text + "\n");
             lblCount.Text = Convert.ToString(++openCount);
+            File.WriteAllText(countFile, Convert.ToString(openCount));
         }
 
         private void backslash_check()
@@ -293,10 +311,7 @@ namespace netopen
             }
         }
 
-        private void openDesktop_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void openDesktop_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -309,55 +324,20 @@ namespace netopen
             txtAddress.Focus();
         }
 
-        private void format1_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void format1_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void format2_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void format2_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void format3_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void format3_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void openD_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void openD_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void openDCopy_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
+        private void openDCopy_CheckedChanged(object sender, EventArgs e) =>  txtAddress.Focus();
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            string[] version = Application.ProductVersion.ToString().Split('.');
-            lblTitle.Text += " v" + version[0] + "." + version[1];
-            String filename = Directory.GetCurrentDirectory() + "\\count.log";
-            if(File.Exists(filename))
-                openCount = Convert.ToInt32(File.ReadAllText(filename));
-            lblCount.Text = Convert.ToString(openCount);
-        }
+        private void PbIcon_Click(object sender, EventArgs e) => 
+            MessageBox.Show("Author: S. Vahid Hosseini. s.vahid.h@pm.me", "About",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        private void PbIcon_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Author: S. Vahid Hosseini. s.vahid.h@pm.me", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void Format0_CheckedChanged(object sender, EventArgs e)
-        {
-            txtAddress.Focus();
-        }
-
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            String filename = Directory.GetCurrentDirectory() + "\\count.log";
-            File.WriteAllText(filename, Convert.ToString(openCount));
-        }
+        private void Format0_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
     }
 }
