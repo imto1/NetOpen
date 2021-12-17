@@ -50,3 +50,4 @@ D:\00-Vahid\net-open\obj\x86\Debug\netopen.csproj.GenerateResource.cache
 D:\00-Vahid\net-open\obj\x86\Debug\netopen.csproj.CoreCompileInputs.cache
 D:\00-Vahid\net-open\obj\x86\Debug\netopen.exe
 D:\00-Vahid\net-open\obj\x86\Debug\netopen.pdb
+D:\00-Vahid\net-open\obj\x86\Debug\netopen.csproj.SuggestedBindingRedirects.cache

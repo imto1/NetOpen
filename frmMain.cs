@@ -147,17 +147,15 @@ namespace netopen
                 PingReply reply = pinger.Send(nameOrAddress);
                 pingable = reply.Status == IPStatus.Success;
             }
-            catch (PingException)
-            {
-                // Discard PingExceptions and return false;
-            }
+            catch (PingException){}
+
             return pingable;
         }
 
         private String dash_check(String path)
         {
-            String clearpath = path.Replace(@"\\", "");
-            String netpath = clearpath;
+            String netpath = path.Replace(@"\\", "");
+            
             if (pingHost(netpath))
                 return path;
             else if (netpath.Contains("-"))
@@ -172,7 +170,73 @@ namespace netopen
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
             }
-            throw new PathTooLongException();
+
+            if (format0.Checked)
+                return hq_check(path);
+            else
+                throw new PathTooLongException();
+        }
+
+        private String hq_check(String path)
+        {
+            String netpath = path.Replace(@"\\", "");
+
+            if (pingHost(netpath))
+                return path;
+            else
+            {
+                String[] pathPart = netpath.Split('-');
+                if (!pathPart[2].Substring(0, 1).Equals("0"))
+                {
+                    int maskLen = 4 - pathPart[2].Length;
+                    for (int i = 0; i < maskLen; i++)
+                        pathPart[2] = "0" + pathPart[2];
+                    netpath = pathPart[0] + "-" + pathPart[1] + "-" + pathPart[2];
+                }
+                else
+                {
+                    while(pathPart[2].Substring(0, 1).Equals("0"))
+                        pathPart[2] = pathPart[2].Remove(0, 1);
+                    netpath = pathPart[0] + "-" + pathPart[1] + "-" + pathPart[2];
+                }
+
+                if(pingHost(netpath))
+                    return (@"\\" + netpath);
+                else
+                    return thq_check(netpath);
+            }
+        }
+
+        private String thq_check(String path)
+        {
+            String netpath = path;
+            if (!netpath.Substring(0, 1).ToUpper().Equals("T"))
+                netpath = "T" + netpath;
+            else
+                throw new PathTooLongException();
+
+            if (pingHost(netpath))
+                return (@"\\" + netpath);
+            else
+            {
+                String[] pathPart = netpath.Split('-');
+                if (!pathPart[2].Substring(0, 1).Equals("0"))
+                {
+                    int maskLen = 4 - pathPart[2].Length;
+                    for (int i = 0; i < maskLen; i++)
+                        pathPart[2] = "0" + pathPart[2];
+                    netpath = pathPart[0] + "-" + pathPart[1] + "-" + pathPart[2];
+                    return (@"\\" + netpath);
+                }
+                else
+                {
+                    while (pathPart[2].Substring(0, 1).Equals("0"))
+                        pathPart[2] = pathPart[2].Remove(0, 1);
+                    netpath = pathPart[0] + "-" + pathPart[1] + "-" + pathPart[2];
+                    return (@"\\" + netpath);
+                }
+                throw new PathTooLongException();
+            }
         }
 
         private void openPath(string path, Color color, string message)
