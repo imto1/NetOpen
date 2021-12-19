@@ -158,23 +158,21 @@ namespace netopen
             
             if (pingHost(netpath))
                 return path;
-            else if (netpath.Contains("-"))
+            else if (netpath.Contains("-") && !format0.Checked)
             {
                 netpath = netpath.Replace("-", "_");
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
             }
-            else
+            else if(netpath.Contains("_"))
             {
                 netpath = netpath.Replace("_", "-");
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
-            }
-
-            if (format0.Checked)
+            } else if (format0.Checked)
                 return hq_check(path);
-            else
-                throw new PathTooLongException();
+
+            throw new PathTooLongException();
         }
 
         private String hq_check(String path)
