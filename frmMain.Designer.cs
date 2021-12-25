@@ -50,6 +50,7 @@
             this.bpBar = new System.Windows.Forms.PictureBox();
             this.pbHeader = new System.Windows.Forms.PictureBox();
             this.lblCount = new System.Windows.Forms.Label();
+            this.chkLog = new System.Windows.Forms.CheckBox();
             this.gbPath.SuspendLayout();
             this.gbAF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
@@ -274,12 +275,25 @@
             // lblCount
             // 
             this.lblCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCount.Location = new System.Drawing.Point(144, 199);
+            this.lblCount.Location = new System.Drawing.Point(225, 199);
             this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(130, 23);
+            this.lblCount.Size = new System.Drawing.Size(49, 23);
             this.lblCount.TabIndex = 18;
             this.lblCount.Text = "0";
             this.lblCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // chkLog
+            // 
+            this.chkLog.AutoSize = true;
+            this.chkLog.Checked = true;
+            this.chkLog.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkLog.Location = new System.Drawing.Point(145, 202);
+            this.chkLog.Name = "chkLog";
+            this.chkLog.Size = new System.Drawing.Size(74, 17);
+            this.chkLog.TabIndex = 19;
+            this.chkLog.Text = "Save logs";
+            this.chkLog.UseVisualStyleBackColor = true;
+            this.chkLog.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
             // 
             // frmMain
             // 
@@ -288,6 +302,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
+            this.Controls.Add(this.chkLog);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pbIcon);
@@ -348,6 +363,7 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.RadioButton format0;
         private System.Windows.Forms.Label lblCount;
+        private System.Windows.Forms.CheckBox chkLog;
     }
 }
 

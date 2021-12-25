@@ -26,6 +26,8 @@ namespace netopen
         {
             string[] version = Application.ProductVersion.ToString().Split('.');
             lblTitle.Text += " v" + version[0] + "." + version[1] + "." + version[2];
+
+            chkLog.Checked = Properties.Settings.Default.logging;
             int index = userName.LastIndexOf('\\') + 1;
             userName = userName.Substring(index, userName.Length - (index));
             userHome = @"c:\users\" + userName + @"\desktop\";
@@ -35,22 +37,29 @@ namespace netopen
             lblCount.Text = Convert.ToString(openCount);
             logFile = userHome + workTime + ".log";
         }
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e) => 
-            File.WriteAllText(countFile, Convert.ToString(openCount));
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(chkLog.Checked)
+                File.WriteAllText(countFile, Convert.ToString(openCount));
+        }
 
         private void log(String text)
         {
-            String now = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
-                DateTime.Now.Day.ToString();
-            if (workTime != now)
+            if (chkLog.Checked)
             {
-                workTime = now;
-                openCount = 0;
-                logFile = userHome + workTime + ".log";
+                String now = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
+                    DateTime.Now.Day.ToString();
+                if (workTime != now)
+                {
+                    workTime = now;
+                    openCount = 0;
+                    logFile = userHome + workTime + ".log";
+                }
+                File.AppendAllText(logFile, text + "\n");
+                lblCount.Text = Convert.ToString(++openCount);
+                File.WriteAllText(countFile, Convert.ToString(openCount));
             }
-            File.AppendAllText(logFile, text + "\n");
-            lblCount.Text = Convert.ToString(++openCount);
-            File.WriteAllText(countFile, Convert.ToString(openCount));
         }
 
         private void backslash_check()
@@ -401,5 +410,11 @@ namespace netopen
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void Format0_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
+
+        private void chkLog_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.logging = chkLog.Checked;
+            Properties.Settings.Default.Save();
+        }
     }
 }
