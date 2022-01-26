@@ -63,6 +63,16 @@ namespace netopen.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ftkcachegrind {
+            get {
+                object obj = ResourceManager.GetObject("ftkcachegrind", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap if_network_transmit_118952 {
             get {
                 object obj = ResourceManager.GetObject("if_network-transmit_118952", resourceCulture);

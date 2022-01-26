@@ -25,13 +25,75 @@ namespace netopen.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool logging {
             get {
                 return ((bool)(this["logging"]));
             }
             set {
                 this["logging"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool send_mail {
+            get {
+                return ((bool)(this["send_mail"]));
+            }
+            set {
+                this["send_mail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string email {
+            get {
+                return ((string)(this["email"]));
+            }
+            set {
+                this["email"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string password {
+            get {
+                return ((string)(this["password"]));
+            }
+            set {
+                this["password"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<hr>\r\n@@<br />\r\n@@REQUESTTEMPLATE=انتقال اطلاعات@@<br />\r\n@@CATEGORY=Service@@<br" +
+            " />\r\n@@SUBCATEGORY=Copy Data@@<br />\r\n@@MODE=Web Form@@<br />\r\n@@IMPACT=کاربر@@<" +
+            "br />\r\n@@PRIORITY=Low@@<br />")]
+        public string mail_body {
+            get {
+                return ((string)(this["mail_body"]));
+            }
+            set {
+                this["mail_body"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@@@انتقال اطلاعات@@@")]
+        public string mail_subject {
+            get {
+                return ((string)(this["mail_subject"]));
+            }
+            set {
+                this["mail_subject"] = value;
             }
         }
     }

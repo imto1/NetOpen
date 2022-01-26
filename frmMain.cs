@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Net;
+using System.Net.Mail;
 
 namespace netopen
 {
@@ -27,7 +29,6 @@ namespace netopen
             string[] version = Application.ProductVersion.ToString().Split('.');
             lblTitle.Text += " v" + version[0] + "." + version[1] + "." + version[2];
 
-            chkLog.Checked = Properties.Settings.Default.logging;
             int index = userName.LastIndexOf('\\') + 1;
             userName = userName.Substring(index, userName.Length - (index));
             userHome = @"c:\users\" + userName + @"\desktop\";
@@ -40,13 +41,13 @@ namespace netopen
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(chkLog.Checked)
+            if (Properties.Settings.Default.logging)
                 File.WriteAllText(countFile, Convert.ToString(openCount));
         }
 
         private void log(String text)
         {
-            if (chkLog.Checked)
+            if (Properties.Settings.Default.logging)
             {
                 String now = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() +
                     DateTime.Now.Day.ToString();
@@ -57,7 +58,6 @@ namespace netopen
                     logFile = userHome + workTime + ".log";
                 }
                 File.AppendAllText(logFile, text + "\n");
-                lblCount.Text = Convert.ToString(++openCount);
                 File.WriteAllText(countFile, Convert.ToString(openCount));
             }
         }
@@ -156,7 +156,7 @@ namespace netopen
                 PingReply reply = pinger.Send(nameOrAddress);
                 pingable = reply.Status == IPStatus.Success;
             }
-            catch (PingException){}
+            catch (PingException) { }
 
             return pingable;
         }
@@ -164,7 +164,7 @@ namespace netopen
         private String dash_check(String path)
         {
             String netpath = path.Replace(@"\\", "");
-            
+
             if (pingHost(netpath))
                 return path;
             else if (netpath.Contains("-") && !format0.Checked)
@@ -173,12 +173,13 @@ namespace netopen
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
             }
-            else if(netpath.Contains("_"))
+            else if (netpath.Contains("_"))
             {
                 netpath = netpath.Replace("_", "-");
                 if (pingHost(netpath))
                     return (@"\\" + netpath);
-            } else if (format0.Checked)
+            }
+            else if (format0.Checked)
                 return hq_check(path);
 
             throw new PathTooLongException();
@@ -202,12 +203,12 @@ namespace netopen
                 }
                 else
                 {
-                    while(pathPart[2].Substring(0, 1).Equals("0"))
+                    while (pathPart[2].Substring(0, 1).Equals("0"))
                         pathPart[2] = pathPart[2].Remove(0, 1);
                     netpath = pathPart[0] + "-" + pathPart[1] + "-" + pathPart[2];
                 }
 
-                if(pingHost(netpath))
+                if (pingHost(netpath))
                     return (@"\\" + netpath);
                 else
                     return thq_check(netpath);
@@ -258,7 +259,9 @@ namespace netopen
                 process.StartInfo.FileName = "explorer";
                 process.StartInfo.Arguments = path;
                 process.Start();
+                lblCount.Text = Convert.ToString(++openCount);
                 log(path);
+                sendMail(path);
             }
             catch (Exception e)
             {
@@ -372,7 +375,9 @@ namespace netopen
                 process.StartInfo.FileName = "explorer";
                 process.StartInfo.Arguments = path;
                 process.Start();
+                lblCount.Text = Convert.ToString(++openCount);
                 log(path);
+                sendMail(path);
             }
             else
             {
@@ -403,18 +408,44 @@ namespace netopen
 
         private void openD_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void openDCopy_CheckedChanged(object sender, EventArgs e) =>  txtAddress.Focus();
+        private void openDCopy_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void PbIcon_Click(object sender, EventArgs e) => 
+        private void PbIcon_Click(object sender, EventArgs e) =>
             MessageBox.Show("Author: S. Vahid Hosseini. s.vahid.h@pm.me", "About",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void Format0_CheckedChanged(object sender, EventArgs e) => txtAddress.Focus();
 
-        private void chkLog_CheckedChanged(object sender, EventArgs e)
+        private void sendMail(String htmlString)
         {
-            Properties.Settings.Default.logging = chkLog.Checked;
-            Properties.Settings.Default.Save();
+            if (Properties.Settings.Default.send_mail)
+                try
+                {
+                    MailMessage message = new MailMessage();
+                    SmtpClient smtp = new SmtpClient();
+                    message.From = new MailAddress(Properties.Settings.Default.email);
+                    message.To.Add(new MailAddress("servicedesk@spgc.ir"));
+                    message.Subject = Properties.Settings.Default.mail_subject;
+                    message.IsBodyHtml = true; //to make message body as html
+                    //String body
+                    message.Body = "<b>" + htmlString + "</b><br />" +
+                        Properties.Settings.Default.mail_body;
+                    smtp.Port = 25;
+                    smtp.Host = "mail.spgc.ir"; //for gmail host  
+                    smtp.EnableSsl = false;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(Properties.Settings.Default.email,
+                        Properties.Settings.Default.password);
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.Send(message);
+                }
+                catch (Exception) { }
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            frmSettings settings = new frmSettings();
+            settings.ShowDialog();
         }
     }
 }

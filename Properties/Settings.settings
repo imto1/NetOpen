@@ -3,7 +3,29 @@
   <Profiles />
   <Settings>
     <Setting Name="logging" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="send_mail" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="email" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="mail_body" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;hr&gt;
+@@&lt;br /&gt;
+@@REQUESTTEMPLATE=انتقال اطلاعات@@&lt;br /&gt;
+@@CATEGORY=Service@@&lt;br /&gt;
+@@SUBCATEGORY=Copy Data@@&lt;br /&gt;
+@@MODE=Web Form@@&lt;br /&gt;
+@@IMPACT=کاربر@@&lt;br /&gt;
+@@PRIORITY=Low@@&lt;br /&gt;</Value>
+    </Setting>
+    <Setting Name="mail_subject" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@@@انتقال اطلاعات@@@</Value>
     </Setting>
   </Settings>
 </SettingsFile>

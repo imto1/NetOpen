@@ -46,11 +46,11 @@
             this.process = new System.Diagnostics.Process();
             this.btnReset = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.lblCount = new System.Windows.Forms.Label();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.pbIcon = new System.Windows.Forms.PictureBox();
             this.bpBar = new System.Windows.Forms.PictureBox();
             this.pbHeader = new System.Windows.Forms.PictureBox();
-            this.lblCount = new System.Windows.Forms.Label();
-            this.chkLog = new System.Windows.Forms.CheckBox();
             this.gbPath.SuspendLayout();
             this.gbAF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
@@ -242,6 +242,27 @@
             this.lblMessage.Size = new System.Drawing.Size(0, 13);
             this.lblMessage.TabIndex = 17;
             // 
+            // lblCount
+            // 
+            this.lblCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCount.Location = new System.Drawing.Point(144, 199);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(49, 23);
+            this.lblCount.TabIndex = 18;
+            this.lblCount.Text = "0";
+            this.lblCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackgroundImage = global::netopen.Properties.Resources.ftkcachegrind;
+            this.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnSettings.Location = new System.Drawing.Point(251, 199);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(23, 23);
+            this.btnSettings.TabIndex = 19;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // pbIcon
             // 
             this.pbIcon.BackColor = System.Drawing.Color.White;
@@ -272,29 +293,6 @@
             this.pbHeader.TabIndex = 0;
             this.pbHeader.TabStop = false;
             // 
-            // lblCount
-            // 
-            this.lblCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCount.Location = new System.Drawing.Point(225, 199);
-            this.lblCount.Name = "lblCount";
-            this.lblCount.Size = new System.Drawing.Size(49, 23);
-            this.lblCount.TabIndex = 18;
-            this.lblCount.Text = "0";
-            this.lblCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // chkLog
-            // 
-            this.chkLog.AutoSize = true;
-            this.chkLog.Checked = true;
-            this.chkLog.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkLog.Location = new System.Drawing.Point(145, 202);
-            this.chkLog.Name = "chkLog";
-            this.chkLog.Size = new System.Drawing.Size(74, 17);
-            this.chkLog.TabIndex = 19;
-            this.chkLog.Text = "Save logs";
-            this.chkLog.UseVisualStyleBackColor = true;
-            this.chkLog.CheckedChanged += new System.EventHandler(this.chkLog_CheckedChanged);
-            // 
             // frmMain
             // 
             this.AcceptButton = this.btnOpen;
@@ -302,7 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnReset;
             this.ClientSize = new System.Drawing.Size(284, 231);
-            this.Controls.Add(this.chkLog);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pbIcon);
@@ -320,7 +318,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(300, 270);
-            this.MinimumSize = new System.Drawing.Size(280, 270);
+            this.MinimumSize = new System.Drawing.Size(300, 270);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NetOpen";
@@ -363,7 +361,7 @@
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.RadioButton format0;
         private System.Windows.Forms.Label lblCount;
-        private System.Windows.Forms.CheckBox chkLog;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 
