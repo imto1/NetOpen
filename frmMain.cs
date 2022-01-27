@@ -376,8 +376,8 @@ namespace netopen
                 process.StartInfo.Arguments = path;
                 process.Start();
                 lblCount.Text = Convert.ToString(++openCount);
-                log(path);
-                sendMail(path);
+                // log(path);
+                // sendMail(path);
             }
             else
             {
